@@ -93,7 +93,7 @@ contract Raffle is VRFConsumerBaseV2 {
      * @return upKeepNeeded
      * @return
      */
-    function checkUpKeep(
+    function checkUpkeep(
         bytes memory /* checkData */
     ) public view returns (bool upKeepNeeded, bytes memory /* performData */) {
         bool itsTimeToDraw = (block.timestamp - i_interval) >=
@@ -107,7 +107,7 @@ contract Raffle is VRFConsumerBaseV2 {
 
     // 1. Get random number to pick a player
     function performUpkeep(bytes calldata /* performData */) external {
-        (bool upKeepNeeded, ) = checkUpKeep("");
+        (bool upKeepNeeded, ) = checkUpkeep("");
         if (!upKeepNeeded) {
             revert Raffle__UpKeepNotNeeded(
                 address(this).balance,
