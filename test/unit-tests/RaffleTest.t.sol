@@ -111,7 +111,7 @@ contract RaffleTest is Test {
         vm.roll(block.number + 1);
 
         // Act
-        (bool upKeepNeeded, ) = raffle.checkUpKeep("");
+        (bool upKeepNeeded, ) = raffle.checkUpkeep("");
 
         assert(!upKeepNeeded);
     }
@@ -124,7 +124,7 @@ contract RaffleTest is Test {
         raffle.performUpkeep("");
 
         // Act
-        (bool upKeepNeeded, ) = raffle.checkUpKeep("");
+        (bool upKeepNeeded, ) = raffle.checkUpkeep("");
 
         // Assert
         assert(!upKeepNeeded);
@@ -138,7 +138,7 @@ contract RaffleTest is Test {
         vm.roll(block.number + 1);
 
         // Act
-        (bool upKeepNeeded, ) = raffle.checkUpKeep("");
+        (bool upKeepNeeded, ) = raffle.checkUpkeep("");
 
         // Assert
         assert(!upKeepNeeded);
@@ -150,7 +150,7 @@ contract RaffleTest is Test {
         TicketBoughtAndEnoughTimePassed
     {
         // Act
-        (bool upKeepNeeded, ) = raffle.checkUpKeep("");
+        (bool upKeepNeeded, ) = raffle.checkUpkeep("");
 
         // Assert
         assert(upKeepNeeded);
