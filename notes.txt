@@ -1,15 +1,14 @@
-SEPOLIA CONTRACT ADDRESSES: 
-Intervals for checkUpKeep in Seconds:
-
-60: 0x62b3543CbC00b8535149D15D7aA436Cb7019f10E
- VRF SubscriptionID: 8285
- Automation (upkeed): 
-    Id : 8771929997465896503379898807836992341056443223211015200425556030312050532597
-    url: https://automation.chain.link/sepolia/8771929997465896503379898807836992341056443223211015200425556030312050532597
-3600: 
-
 MUMBAI CONTRACT ADDRESSES:
-Intervals for checkUpKeep in Seconds:
+0x5FD00fC84fa15c4156b11e1C7A9eDaC64C719a33:
+    interval in seconds: 3600
+    sub id: 6892
+    No upkeep registered
+0x666dDf38c9F35E63e6b4d4895a200f0CbeAe85E5: (WORKS)
+    interval in seconds: 60
+    sub id: 6893
+    vrf url: https://vrf.chain.link/mumbai/6893
+    upkeep ulr: https://automation.chain.link/mumbai/8096599185902413261099689344112021760457955187876458442031783499493171379275
+
 
 POLYGON MAINNET CONTRACT ADDRESS:
 Executes every 28 days (2419200 seconds):
