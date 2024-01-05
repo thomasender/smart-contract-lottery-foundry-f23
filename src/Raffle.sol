@@ -46,6 +46,7 @@ contract Raffle is VRFConsumerBaseV2 {
     uint256 private s_lastDrawTimestamp;
     address private s_recentWinner;
     RaffleState private s_raffleState;
+    address public s_owner;
 
     /** Events */
     event EnteredRaffle(address indexed player);
@@ -69,6 +70,7 @@ contract Raffle is VRFConsumerBaseV2 {
 
         s_raffleState = RaffleState.OPEN;
         s_lastDrawTimestamp = block.timestamp;
+        s_owner = msg.sender;
     }
 
     function buyTicket() external payable {
@@ -149,13 +151,22 @@ contract Raffle is VRFConsumerBaseV2 {
         /// @notice we reset the last draw timestamp so the raffle is restarted
         s_lastDrawTimestamp = block.timestamp;
         /// @notice sends the prize money to the winner of the raffle
-        (bool success, ) = winner.call{value: address(this).balance}("");
+        (bool success, ) = winner.call{value: getPricePool()}("");
 
         /// @notice emits the winner drawn event
         emit WinnerDrawn(winner);
 
         /// @notice in case something goes wrong with the transfer, we revert the transaction in order to save the money
         if (!success) {
+            revert Raffle__TransferFailed();
+        }
+        /**
+         * @notice sends the remaining balance to the contract owner for refunding chainlink automation and VRF Subscription
+         * and as incentive for the contract owner to maintain the project
+         */
+
+        (bool success2, ) = s_owner.call{value: address(this).balance}("");
+        if (!success2) {
             revert Raffle__TransferFailed();
         }
     }
@@ -184,5 +195,15 @@ contract Raffle is VRFConsumerBaseV2 {
 
     function getLastDrawTimestamp() external view returns (uint256) {
         return s_lastDrawTimestamp;
+    }
+
+    /**
+     * @notice This function is used to get the price pool of the raffle, which is 90% of the contract balance
+     * @notice 10% of the contract balance is sent to the owner of the raffle to fund the Chainlink VRF subscription and automation and as incentive to maintain the project
+     * @dev This function is used to get the price pool of the raffle
+     * @return pricePool
+     */
+    function getPricePool() public view returns (uint256) {
+        return (address(this).balance * 9) / 10;
     }
 }

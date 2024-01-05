@@ -254,7 +254,10 @@ contract RaffleTest is Test {
             raffle.buyTicket{value: entranceFee}();
         }
 
-        uint256 priceMoney = entranceFee * (additionalEntrances + 1);
+        uint256 contractBalanceBeforeDraw = address(raffle).balance;
+        uint256 priceMoney = raffle.getPricePool();
+        uint256 ownerBalanceBeforeDraw = raffle.s_owner().balance;
+        uint256 maintainenceAndIncentiveMoney = contractBalanceBeforeDraw / 10;
 
         // Act
         // We need the requestId to call fulfillRandomWords
@@ -275,7 +278,9 @@ contract RaffleTest is Test {
             uint256(requestId),
             address(raffle)
         );
-
+        uint256 ownerBalanceAfterDraw = raffle.s_owner().balance;
+        uint256 ownerBalanceDifferenceAfterDraw = ownerBalanceAfterDraw -
+            ownerBalanceBeforeDraw;
         address recentWinner = raffle.getRecentWinner();
 
         // Assert
@@ -285,14 +290,14 @@ contract RaffleTest is Test {
         assert(recentWinner != address(0));
         assert(raffle.getPlayers().length == 0);
         assert(previousLastDrawTimestamp < raffle.getLastDrawTimestamp());
-        console.log("recentWinner", recentWinner.balance);
-        console.log(
-            "STARTING_USER_BALANCE + priceMoney",
-            STARTING_USER_BALANCE + priceMoney
-        );
         assert(
             recentWinner.balance ==
-                STARTING_USER_BALANCE + priceMoney - entranceFee
+                ((STARTING_USER_BALANCE + priceMoney) - entranceFee)
         );
+        assert(ownerBalanceAfterDraw > ownerBalanceBeforeDraw);
+        assert(
+            ownerBalanceDifferenceAfterDraw == maintainenceAndIncentiveMoney
+        );
+        assert(address(raffle).balance == 0);
     }
 }
