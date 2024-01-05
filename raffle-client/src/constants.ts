@@ -2,8 +2,8 @@ import { ContractABI } from "./hooks/use-contract";
 import ABI from "./raffle-abi.json"
 
 // OWNER: 0x7B3594AA123CFdFE16fb2d9122D86E34E76B8749
-// MUMBAI Address: 0x666dDf38c9F35E63e6b4d4895a200f0CbeAe85E5 (Interval 60 seconds)
-export const RAFFLE_ADDRESS = "0x666dDf38c9F35E63e6b4d4895a200f0CbeAe85E5";
+// MUMBAI Address: 0xcef6bFC4A2DD0B289a4F7bE76F236fd2983bC7ef (Interval 60 seconds)
+export const RAFFLE_ADDRESS = "0xcef6bFC4A2DD0B289a4F7bE76F236fd2983bC7ef";
 export const CONTRACT_ABI = ABI as ContractABI;
 // Mumbai Testnet TX BASE URL: https://mumbai.polygonscan.com/tx/
 // Mainnet TX BASE URL: https://polygonscan.com/tx/
