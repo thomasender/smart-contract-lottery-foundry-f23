@@ -2,14 +2,17 @@
 
 ## About
 
-This project is a simple smart contract lottery that uses a prooveably uses randomness.
+This project is a simple smart contract lottery that uses a prooveably uses randomness to draw a winner. It is based on the [Chainlink VRF](https://dev.chain.link/products/vrf) and [Chainlink Automation](https://dev.chain.link/products/automation) to automate the draw.
 
-### TODO:
+### TODO / How it works:
 
-- Users can enter the lottery by buying a ticket
-  - Ticket fees sum up to the prize pool and are distributed to the winner
-- After a certain amount of time, the lottery is closed and a winner is drawn
-  - This will be done utilising Chainlink's VRF for Randomness and Chainlink's Automation for executing the draw
+- [X] Users can enter the lottery by buying a ticket
+  - [X] 90% of the ticket fees sum up to the prize pool and are distributed to the winner
+  - [X] 10% of the ticket fees are distributed to the owner of the raffle
+  - [X] the owner is responsible for refunding the chainlink subscription and chainlink automation
+  - [X] there is no way for the owner to withdraw the prize pool
+- [X] After a certain amount of time, the lottery is closed and a winner is drawn
+  - [X] This will be done utilising Chainlink's VRF for Randomness and Chainlink's Automation for executing the draw
 
 
 ## Foundry
