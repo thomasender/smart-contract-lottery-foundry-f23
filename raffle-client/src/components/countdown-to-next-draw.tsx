@@ -24,7 +24,6 @@ export const Countdown: React.FC<CountdownProps> = ({ timestampTillNextDraw }) =
   const calculateTimeLeft = () => {
     const difference = timestampTillNextDraw - Date.now();
     const timeLeft: TimeLeft = {};
-
     if (difference > 0) {
         timeLeft.days = Math.floor(difference / (ONE_DAY_IN_MS));
         timeLeft.hours = Math.floor((difference / ONE_HOUR_IN_MS) % HOURS_IN_DAY);
@@ -53,7 +52,7 @@ export const Countdown: React.FC<CountdownProps> = ({ timestampTillNextDraw }) =
   }
   return (
     <div>
-      Next draw: {days}/{hours}/{minutes}/{seconds}
+      The next draw is in {days ? `${days} Days ` : null}{hours ? `${hours} Hours ` : null}{minutes ? `${minutes} Minutes ` : null}{seconds ? `${seconds} Seconds` : null}
     </div>
   );
 };
