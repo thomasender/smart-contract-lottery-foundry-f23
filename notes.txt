@@ -1,10 +1,15 @@
 MUMBAI CONTRACT ADDRESSES:
-0xcef6bFC4A2DD0B289a4F7bE76F236fd2983bC7ef:
+0xcef6bFC4A2DD0B289a4F7bE76F236fd2983bC7ef: (WORKS NICELY)
     interval in seconds: 60
     sub id: 6911
     vrf url: https://vrf.chain.link/mumbai/6911
-    upkeep ulr: https://automation.chain.link/mumbai/6200672452712698416637651473858002959268827860053451943071918388510443128735
+    upkeep url: https://automation.chain.link/mumbai/6200672452712698416637651473858002959268827860053451943071918388510443128735
 
+0xd25F426673FbC77C0967e42dF49b3Fa91655cc43:
+    interval in seconds: 1800
+    sub id: 6914
+    vrf url: https://vrf.chain.link/mumbai/6914
+    upkeep url: https://automation.chain.link/mumbai/52415997736865642315731715474250261141550428341737692614428407417191320193696
 
 POLYGON MAINNET CONTRACT ADDRESS:
 Executes every 28 days (2419200 seconds):
