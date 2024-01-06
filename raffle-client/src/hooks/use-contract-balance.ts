@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BigNumberish, formatEther } from 'ethers';
 import { useProvider } from './use-provider';
-import { FUND_ME_ADDRESS } from '../constants';
+import { RAFFLE_ADDRESS } from '../constants';
 
 export const useContractBalance = () => {
     const provider = useProvider()
@@ -12,7 +12,7 @@ export const useContractBalance = () => {
             return;
         }
         const getBalanceFromAddress = async () => {
-            const balance: BigNumberish = await provider.getBalance(FUND_ME_ADDRESS);
+            const balance: BigNumberish = await provider.getBalance(RAFFLE_ADDRESS);
             setContractBalance(formatEther(balance));
         }
         getBalanceFromAddress();
