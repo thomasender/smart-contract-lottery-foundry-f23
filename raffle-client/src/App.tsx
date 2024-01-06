@@ -14,10 +14,12 @@ import { useState } from "react";
 import { parseEther } from "ethers";
 import { TransactionNotification } from "./components/tx-notification";
 import { TicketBoughtNotification } from "./components/ticket-bought-notification";
-import { useLastDrawTimestamp } from "./hooks/use-last-draw-timestamp";
 import { useTimestampTillNextDraw } from "./hooks/use-time-till-next-draw";
 import { IsDrawingWinnerNotification } from "./components/is-drawing-winner-notification";
+import { usePricePool } from "./hooks/use-prize-pool";
+import { useTicketsForCurrentUser } from "./hooks/use-tickets-for-current-user";
 import Countdown from "./components/countdown-to-next-draw";
+import { LastDrawInfo } from "./components/last-draw-info";
 
 function App() {
     const [txHash, setTxHash] = useState<string | null>(null);
@@ -26,12 +28,12 @@ function App() {
     const hasWindowEthereum = useCheckWindowEthereum();
     const signer = useSigner();
     const players = usePlayers();
+    const ticketsForPlayer = useTicketsForCurrentUser();
     const entranceFee = useEntranceFee();
     const contract = useContract(RAFFLE_ADDRESS, CONTRACT_ABI);
-    const lastDrawTimestamp = useLastDrawTimestamp();
-    const lastDrawDate = lastDrawTimestamp ? new Date(lastDrawTimestamp) : null;
     const timestampTillNextDraw = useTimestampTillNextDraw();
-  
+    const pricePool = usePricePool();
+
     useOnAccountsChanged();
     useOnChainChanged();
 
@@ -125,20 +127,23 @@ function App() {
     <AppFrame>
       <h1>Raffle</h1>
       <Paragraph>Welcome to the proovably fair Raffle!</Paragraph>
-      <Paragraph>Raffle State: {raffleState}</Paragraph>
-      {!signer &&<>
+      <Paragraph>The Raffle is currently {raffleState.toUpperCase()}</Paragraph>
+      <Countdown timestampTillNextDraw={timestampTillNextDraw} />
+      {!signer &&
+      <>
         <Paragraph>Connect your wallet to participate!</Paragraph>
         <Button onClick={onConnect}>Connect Wallet</Button>
       </>
       }
       <Paragraph>Currently there are {players.length} players signed up for the next draw!</Paragraph>
-      <Paragraph>Buy your ticket(s) now for {entranceFee} Matic</Paragraph>
+      <Paragraph>Price Pool: {pricePool} Matic</Paragraph>
+      {ticketsForPlayer > 0 ? <Paragraph>You have {ticketsForPlayer} ticket(s) for the next draw!</Paragraph> : <Paragraph>You have no tickets for the next draw!</Paragraph>}
+      <Paragraph>Buy {ticketsForPlayer > 0 ? 'more' : null} ticket(s) now for {entranceFee} Matic</Paragraph>
       <Button onClick={onBuyTicket}>Buy Ticket!</Button>
       {txHash ? <TransactionNotification txHash={txHash} /> : null}
       {showTicketBoughtNotification ? <TicketBoughtNotification closeMe={() => setShowTicketBoughtNotification(false)}/> : null}
-      {lastDrawDate ? <Paragraph>Last Draw: {lastDrawDate.toLocaleString()} </Paragraph> : null}
+      <LastDrawInfo />
       <IsDrawingWinnerNotification />
-      <Countdown timestampTillNextDraw={timestampTillNextDraw} />
     </AppFrame>
   )
 }
