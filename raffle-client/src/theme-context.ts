@@ -1,28 +1,32 @@
 import { createContext, useContext } from 'react';
+import { DefaultTheme } from 'styled-components';
 
-interface Theme {
-  colors: {
-    primary: string;
-    error: string;
-    info: string;
-    contrast: string;
-    background: string;
-    text: string;
-    hover: string;
-    purple: string;
-  };
-  button: {
-    primary: {
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    colors: {
+      primary: string;
+      error: string;
+      info: string;
+      contrast: string;
       background: string;
-      color: string;
+      text: string;
+      hover: string;
+      purple: string;
+      lightgreen: string;
     };
-    secondary: {
-      background: string;
-      color: string;
-    };
+    button: {
+      primary: {
+        background: string;
+        color: string;
+      };
+      secondary: {
+        background: string;
+        color: string;
+      };
+    }
   }
 }
-export const light: Theme = {
+export const light: DefaultTheme = {
   colors: {
     primary: '#0070f3',
     error: '#ff0000',
@@ -32,6 +36,7 @@ export const light: Theme = {
     text: '#333',
     hover: '#ccc',
     purple: '#7342DC',
+    lightgreen: '#1dff1d',
   },
   button: {
     primary: {
@@ -46,7 +51,7 @@ export const light: Theme = {
   // Add more theme variables as needed
 };
 
-export const dark: Theme = {
+export const dark: DefaultTheme = {
   colors: {
     primary: '#0070f3',
     error: '#ff0000',
@@ -56,6 +61,7 @@ export const dark: Theme = {
     text: '#f3f3f3',
     hover: '#ccc',
     purple: '#7342DC',
+    lightgreen: '#1dff1d',
   },
   button: {
     primary: {
