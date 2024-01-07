@@ -51,6 +51,7 @@ export const AppFrame = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: ${FOOTER_HEIGHT}px;
+  gap: 24px;
 `
 
 export const Button = styled.button`
@@ -63,7 +64,7 @@ export const Button = styled.button`
     border-radius: 5px;
     color: ${({ theme }) => theme.colors.text};
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 700;
     padding: 0.5rem 1rem;
     transition: all 0.2s ease-in-out;
@@ -162,7 +163,7 @@ export const H1 = styled.h1`
     text-align: center;
 `
 
-export const Paragraph = styled.p`
+export const P = styled.p`
     font-size: 1rem;
     margin: 0;
     text-align: start;

@@ -1,4 +1,4 @@
-import { H1, NotificationContainer, Paragraph } from './styles'
+import { H1, NotificationContainer, P } from './styles'
 import { LoadingSpinner } from './loading-spinner'
 import styled from 'styled-components'
 import { useCallback, useEffect } from 'react'
@@ -43,8 +43,8 @@ export const IsDrawingWinnerNotification = () => {
           <Polygon />
           <H1>The Winner is being drawn!</H1>
           <LoadingSpinner />
-          <Paragraph>It may take a few minutes to complete.</Paragraph>
-          <Paragraph>Hold on to your seat!</Paragraph>
+          <P>It may take a few minutes to complete.</P>
+          <P>Hold on to your seat!</P>
       </NotificationContainer>
     </BlurBackground>
   )

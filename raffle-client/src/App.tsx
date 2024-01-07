@@ -1,67 +1,31 @@
-import { AppFrame, Button, Paragraph } from "./components/styles";
-import { CONTRACT_ABI, POLYGON_MUMBAI_CHAIN_ID, RAFFLE_ADDRESS } from "./constants";
-import { useChainId } from "./hooks/use-chain-id";
-import { useCheckWindowEthereum } from "./hooks/use-check-window-ethereum";
-import { useRaffleState } from "./hooks/use-raffle-state";
-import { useSigner } from "./hooks/use-signer";
-import { Polygon } from "./icons/polygon";
-import { useOnAccountsChanged } from "./hooks/use-on-accounts-changed";
-import { useOnChainChanged } from "./hooks/use-on-chain-changed";
-import { usePlayers } from "./hooks/use-players";
-import { useEntranceFee } from "./hooks/use-entrance-fee";
-import { useContract } from "./hooks/use-contract";
 import { useState } from "react";
-import { parseEther } from "ethers";
+
+import { AppFrame, Button} from "./components/styles";
 import { TransactionNotification } from "./components/tx-notification";
 import { TicketBoughtNotification } from "./components/ticket-bought-notification";
-import { useTimestampTillNextDraw } from "./hooks/use-time-till-next-draw";
 import { IsDrawingWinnerNotification } from "./components/is-drawing-winner-notification";
-import { usePricePool } from "./hooks/use-prize-pool";
-import { useTicketsForCurrentUser } from "./hooks/use-tickets-for-current-user";
-import Countdown from "./components/countdown-to-next-draw";
 import { LastDrawInfo } from "./components/last-draw-info";
+import { Header } from "./components/header";
+import { WelcomeInfo } from "./components/welcome-info";
+import { RaffleStateInfo } from "./components/raffle-state-info";
+import { PlayerInfo } from "./components/player-info";
+import { BuyTicketButton } from "./components/buy-ticket-button";
+import { ConnectButton } from "./components/connect-button";
+import {  POLYGON_MUMBAI_CHAIN_ID } from "./constants";
+import { useChainId } from "./hooks/use-chain-id";
+import { useCheckWindowEthereum } from "./hooks/use-check-window-ethereum";
+import { useOnAccountsChanged } from "./hooks/use-on-accounts-changed";
+import { useOnChainChanged } from "./hooks/use-on-chain-changed";
+import { Polygon } from "./icons/polygon";
 
 function App() {
     const [txHash, setTxHash] = useState<string | null>(null);
     const [showTicketBoughtNotification, setShowTicketBoughtNotification] = useState(false);
     const chainId = useChainId();
     const hasWindowEthereum = useCheckWindowEthereum();
-    const signer = useSigner();
-    const players = usePlayers();
-    const ticketsForPlayer = useTicketsForCurrentUser();
-    const entranceFee = useEntranceFee();
-    const contract = useContract(RAFFLE_ADDRESS, CONTRACT_ABI);
-    const timestampTillNextDraw = useTimestampTillNextDraw();
-    const pricePool = usePricePool();
 
     useOnAccountsChanged();
     useOnChainChanged();
-
-    const raffleState = useRaffleState();
-
-  const onConnect = async () => {
-    if(hasWindowEthereum) {
-      await window.ethereum?.request({ method: 'eth_requestAccounts' });
-    }
-  }
-
-  const onBuyTicket = async () => {
-    if(contract && signer) {
-      try {
-        const tx = await contract.buyTicket({ value: parseEther(entranceFee.toFixed(18)) });
-        setTxHash(tx.hash);
-        const receit = await tx.wait();
-        if(receit && receit.status === 1) {
-          setTxHash("")
-          setShowTicketBoughtNotification(true);
-          console.log({receit})
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }
-
 
   if (!hasWindowEthereum) {
     return <>
@@ -125,24 +89,15 @@ function App() {
 
   return (
     <AppFrame>
-      <h1>Raffle</h1>
-      <Paragraph>Welcome to the proovably fair Raffle!</Paragraph>
-      <Paragraph>The Raffle is currently {raffleState.toUpperCase()}</Paragraph>
-      <Countdown timestampTillNextDraw={timestampTillNextDraw} />
-      {!signer &&
-      <>
-        <Paragraph>Connect your wallet to participate!</Paragraph>
-        <Button onClick={onConnect}>Connect Wallet</Button>
-      </>
-      }
-      <Paragraph>Currently there are {players.length} players signed up for the next draw!</Paragraph>
-      <Paragraph>Price Pool: {pricePool} Matic</Paragraph>
-      {ticketsForPlayer > 0 ? <Paragraph>You have {ticketsForPlayer} ticket(s) for the next draw!</Paragraph> : <Paragraph>You have no tickets for the next draw!</Paragraph>}
-      <Paragraph>Buy {ticketsForPlayer > 0 ? 'more' : null} ticket(s) now for {entranceFee} Matic</Paragraph>
-      <Button onClick={onBuyTicket}>Buy Ticket!</Button>
+      <Header />
+      <WelcomeInfo />
+      <RaffleStateInfo />
+      <PlayerInfo />
+      <ConnectButton />
+      <BuyTicketButton setTxHash={setTxHash} setShowTicketBoughtNotification={setShowTicketBoughtNotification} />
+      <LastDrawInfo />
       {txHash ? <TransactionNotification txHash={txHash} /> : null}
       {showTicketBoughtNotification ? <TicketBoughtNotification closeMe={() => setShowTicketBoughtNotification(false)}/> : null}
-      <LastDrawInfo />
       <IsDrawingWinnerNotification />
     </AppFrame>
   )

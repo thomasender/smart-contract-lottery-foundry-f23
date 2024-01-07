@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { FlexColCenter, P } from './styles';
 
 type CountdownProps = {
   timestampTillNextDraw: number; // The timestamp to count down to
@@ -46,14 +46,21 @@ export const Countdown: React.FC<CountdownProps> = ({ timestampTillNextDraw }) =
   });
 
   const { days, hours, minutes, seconds } = timeLeft;
-
   if (!days && !hours && !minutes && !seconds) {
     return null;
   }
+
   return (
-    <div>
-      The next draw is in {days ? `${days} Days ` : null}{hours ? `${hours} Hours ` : null}{minutes ? `${minutes} Minutes ` : null}{seconds ? `${seconds} Seconds` : null}
-    </div>
+    <FlexColCenter>
+      <div>
+        <P>
+          The next draw is in 
+        </P>
+        <P>
+          {days ? `${days} Days ` : null}{hours ? `${hours} Hours ` : null}{minutes ? `${minutes} Minutes ` : null}{seconds ? `${seconds} Seconds` : null}
+        </P>
+      </div>
+    </FlexColCenter>
   );
 };
 
