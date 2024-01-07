@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useContract } from './use-contract'
 import { CONTRACT_ABI, POLL_INTERVAL_IN_MS, RAFFLE_ADDRESS } from '../constants';
 
-export const usePlayers = () => {
+export const usePlayers = ({removeDuplicates = true}: {removeDuplicates?: boolean}) => {
     const contract = useContract(RAFFLE_ADDRESS, CONTRACT_ABI)
     const [players, setPlayers] = useState<string[]>([]);
 
@@ -12,8 +12,13 @@ export const usePlayers = () => {
         }
         const getPlayers = async () => {
             const players = await contract.getPlayers();
-            // remove duplicates
-            const fundersArray = Array.from(new Set(players)) as string[];
+            let fundersArray;
+            if (removeDuplicates) {
+                // remove duplicates
+                fundersArray = Array.from(new Set(players)) as string[];
+            } else {
+                fundersArray = players as string[];
+            }
             setPlayers(fundersArray)
         }
         getPlayers()

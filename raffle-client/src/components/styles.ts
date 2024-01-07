@@ -1,5 +1,4 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { FOOTER_HEIGHT } from './footer';
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -19,10 +18,11 @@ export const GlobalStyle = createGlobalStyle`
         flex-direction: column;
         align-items: center;
         height: 100%;
+        overflow-y: scroll;
     }
 
     a {
-        color: ${({ theme }) => theme.colors.purple};
+        color: ${({ theme }) => theme.colors.text};
     }
 
     .avatar {
@@ -50,7 +50,6 @@ export const AppFrame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: ${FOOTER_HEIGHT}px;
   gap: 24px;
 `
 
@@ -60,7 +59,7 @@ export const Button = styled.button`
     gap: 12px;
     align-items: center;
     background-color: transparent;
-    border: 2px solid ${({ theme }) => theme.colors.purple};
+    border: 2px solid ${({ theme }) => theme.colors.lightgreen};
     border-radius: 5px;
     color: ${({ theme }) => theme.colors.text};
     cursor: pointer;
@@ -73,7 +72,7 @@ export const Button = styled.button`
 
     // A tooltip to show when the button is disabled
     &::after {
-        content: "Not enough Matic!";
+        content: "Not now!";
         display: none;
         position: absolute;
         background-color: black;
@@ -98,8 +97,8 @@ export const Button = styled.button`
     }
 
     &:hover:not(:disabled) {
-        background-color: ${({ theme }) => theme.colors.purple};
-        color: white;
+        background-color: ${({ theme }) => theme.colors.lightgreen};
+        color: black;
     }
 
     &:disabled:hover {
@@ -109,15 +108,6 @@ export const Button = styled.button`
             fill: ${({ theme }) => theme.colors.error};
         }
     }
-`;
-
-export const Input = styled.input`
-    width: 100%;    
-    max-width: 300px;
-    border: 3px solid ${({ theme }) => theme.colors.purple};
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
 `;
 
 export const FlexRowCenter = styled.div`
@@ -137,6 +127,19 @@ export const FlexColCenter = styled.div`
     gap: 12px;
 `;
 
+export const InfoBox = styled(FlexColCenter)`
+    width: 100%;
+    min-width: 320px;
+    max-width: 540px;
+    padding: 12px;
+`
+
+export const InfoBoxBordered = styled(InfoBox)`
+    border-radius: 12px;
+    border: 2px solid ${({ theme }) => theme.colors.lightgreen};
+    box-shadow: 0 0 12px ${({ theme }) => theme.colors.lightgreen};
+`
+
 export const FlexColStart = styled.div`
     align-items: start;
     display: flex;
@@ -149,24 +152,30 @@ export const DescriptionWrapper = styled(FlexColStart)`
     gap: 6px;
 `
 
-export const DataItem = styled.p`
-    width: 100%;
-    font-size: 1rem;
-    margin: 0;
-    text-align: start;
-`
-
 export const H1 = styled.h1`
-    font-size: 2rem;
+    font-size: 1.4rem;
     margin: 0;
     margin-bottom: 12px;
     text-align: center;
+    @media (min-width: 768px) {
+        font-size: 2rem;
+    }
 `
 
 export const P = styled.p`
-    font-size: 1rem;
     margin: 0;
-    text-align: start;
+    text-align: center;
+    @media (min-width: 768px) {
+        font-size: 1.8rem;
+    }
+
+`
+
+export const PSmall = styled(P)`
+    font-size: 0.7rem;
+    @media (min-width: 768px) {
+        font-size: 1rem;
+    }
 `
 
 export const ErrorMessage = styled.p`
@@ -196,9 +205,9 @@ export const NotificationContainer = styled.div`
     gap: 24px;
     padding: 2rem;
     border-radius: 0.5rem;
-    border: 2px solid ${({ theme }) => theme.colors.purple};
+    border: 2px solid ${({ theme }) => theme.colors.lightgreen};
     background-color: ${({ theme }) => theme.colors.background};
-    box-shadow: 0 0 1rem 0.5rem ${({ theme }) => theme.colors.purple};
+    box-shadow: 0 0 1rem 0.5rem ${({ theme }) => theme.colors.lightgreen};
 
     .thank-you-pic {
         width: 100px;
@@ -221,7 +230,7 @@ export const ContainerCloseButton = styled.button`
     border-radius: 0.5rem;
     color: ${({ theme }) => theme.colors.text};
     cursor: pointer;
-    box-shadow: 0 0 1rem 0.5rem ${({ theme }) => theme.colors.purple};
+    box-shadow: 0 0 1rem 0.5rem ${({ theme }) => theme.colors.text};
 
     @media (min-width: 510px) {
         right: -16px;

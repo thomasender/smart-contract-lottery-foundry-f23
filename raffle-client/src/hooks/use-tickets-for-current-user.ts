@@ -3,7 +3,7 @@ import { usePlayers } from './use-players'
 import { useSigner } from './use-signer';
 
 export const useTicketsForCurrentUser = () => {
-    const players = usePlayers();
+    const players = usePlayers({removeDuplicates: false});
     const signer = useSigner();
     const currentPlayerAddress = signer?.address;
     const [ticketsForCurrentPlayer, setTicketsForCurrentPlayer] = useState<number>(0);

@@ -22,9 +22,9 @@ const LoadingSpinnerWrapper = styled.div`
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: ${({ theme }) => theme.colors.purple};
+  background: ${({ theme }) => theme.colors.lightgreen};
   margin: -4px 0 0 -4px;
-  box-shadow: 0 0 1rem 0.4rem ${({ theme }) => theme.colors.purple};
+  box-shadow: 0 0 1rem 0.4rem ${({ theme }) => theme.colors.lightgreen};
 }
 .lds-roller div:nth-child(1) {
   animation-delay: -0.036s;

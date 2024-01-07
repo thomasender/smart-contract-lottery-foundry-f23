@@ -2,8 +2,8 @@ import { H1, NotificationContainer, P } from './styles'
 import { LoadingSpinner } from './loading-spinner'
 import styled from 'styled-components'
 import { useCallback, useEffect } from 'react'
-import { Polygon } from '../icons/polygon'
 import { RAFFLESTATE, useRaffleState } from '../hooks/use-raffle-state'
+import CloverPNG from '../assets/clover.png'
 
 const BlurBackground = styled.div`
   position: fixed;
@@ -40,7 +40,7 @@ export const IsDrawingWinnerNotification = () => {
   return (
     <BlurBackground onClick={handleClick}>
       <NotificationContainer>
-          <Polygon />
+          <img src={CloverPNG} alt="clover" width="60px" height="60px" />
           <H1>The Winner is being drawn!</H1>
           <LoadingSpinner />
           <P>It may take a few minutes to complete.</P>

@@ -7,9 +7,6 @@ const StyledWelcomeInfo = styled.div`
     align-items: center;
     justify-content: center;
     padding: 12px;
-    border-radius: 12px;
-    border: 1px solid ${({ theme }) => theme.colors.purple};
-    box-shadow: 0 0 12px ${({ theme }) => theme.colors.purple};
 `;
 
 export const WelcomeInfo = () => {

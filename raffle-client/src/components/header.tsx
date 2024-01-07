@@ -1,19 +1,17 @@
 import styled, {keyframes} from 'styled-components'
 import { Polygon } from '../icons/polygon'
+import { H1 } from './styles';
+import CloverPNG from '../assets/clover.png'
 
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding-top: 12px;
   gap: 24px;
-
-  h1 {
-    font-size: 2rem;
-  }
 `
 
-const rotate = keyframes`
+const rotateKeyframes = keyframes`
     from {
         transform: rotateY(0deg);
     }
@@ -22,17 +20,20 @@ const rotate = keyframes`
     }
 `
 
-const RotatingPolygon = styled.div`
-    animation: ${rotate} 10s linear infinite;
+const RotateAnimation = styled.div`
+    animation: ${rotateKeyframes} 10s linear infinite;
 `;
 
 export const Header = () => {
   return (
     <HeaderContainer>
-        <h1>Proovably FAIR Raffle!</h1>
-        <RotatingPolygon>
+        <RotateAnimation>
+          <img src={CloverPNG} alt="clover" width="60px" height="60px" />
+        </RotateAnimation>
+        <H1>Proovably FAIR Raffle!</H1>
+        <RotateAnimation>
             <Polygon />
-        </RotatingPolygon>
+        </RotateAnimation>
     </HeaderContainer>
   )
 }

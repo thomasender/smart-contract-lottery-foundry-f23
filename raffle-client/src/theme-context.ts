@@ -36,7 +36,7 @@ export const light: DefaultTheme = {
     text: '#333',
     hover: '#ccc',
     purple: '#7342DC',
-    lightgreen: '#1dff1d',
+    lightgreen: 'rgb(84, 188, 82)',
   },
   button: {
     primary: {
@@ -61,7 +61,7 @@ export const dark: DefaultTheme = {
     text: '#f3f3f3',
     hover: '#ccc',
     purple: '#7342DC',
-    lightgreen: '#1dff1d',
+    lightgreen: 'rgb(84, 188, 82)',
   },
   button: {
     primary: {

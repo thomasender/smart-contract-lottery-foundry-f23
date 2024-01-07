@@ -1,32 +1,42 @@
-import styled from "styled-components";
 import { useTicketsForCurrentUser } from "../hooks/use-tickets-for-current-user";
-import { P } from "./styles";
+import { InfoBox, P } from "./styles";
 import { useSigner } from "../hooks/use-signer";
-import { useEntranceFee } from "../hooks/use-entrance-fee";
+import { sliceAddress } from "../utils";
+import { BuyTicketButton } from "./buy-ticket-button";
 
-const StyledPlayerInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid ${({ theme }) => theme.colors.lightgreen};
-    box-shadow: 0 0 12px ${({ theme }) => theme.colors.lightgreen};
-`;
-
-export const PlayerInfo = () => {
+export const PlayerInfo = ({setTxHash, setShowTicketBoughtNotification}: {
+    setTxHash: (txHash: string) => void;
+    setShowTicketBoughtNotification: (show: boolean) => void;
+}) => {
     const ticketsForPlayer = useTicketsForCurrentUser();
     const signer = useSigner();
-    const entranceFee = useEntranceFee();
+
+    const calcPlayerTicketsInfoLabel = () => {
+      if (ticketsForPlayer === 0) {
+        return 'You have no tickets for the next draw!'
+      } else if (ticketsForPlayer === 1) {
+        return 'You have 1 ticket for the next draw!'
+      } else {
+        return `You have ${ticketsForPlayer} tickets for the next draw!`
+      }
+    }
+
+    const calcBuyMoreTicketsLabel = () => {
+      if (ticketsForPlayer > 0) {
+         return 'Buy more tickets now!'
+      } else {
+        return 'Buy tickets now!'
+      }
+    }
 
     if (!signer) {
       return null
     }
   return (
-    <StyledPlayerInfo>
-        {ticketsForPlayer > 0 ? <P>You have {ticketsForPlayer} ticket(s) for the next draw!</P> : <P>You have no tickets for the next draw!</P>}
-        <P>Buy {ticketsForPlayer > 0 ? 'more' : null} ticket(s) now for {entranceFee} Matic</P>
-    </StyledPlayerInfo>
+    <InfoBox>
+      <P>Connected with {sliceAddress(signer.address)}</P>
+        <P>{calcPlayerTicketsInfoLabel()}</P>
+        <BuyTicketButton setTxHash={setTxHash} setShowTicketBoughtNotification={setShowTicketBoughtNotification} label={calcBuyMoreTicketsLabel()}/>
+    </InfoBox>
   )
 }

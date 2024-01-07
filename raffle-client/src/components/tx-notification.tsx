@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useCallback, useEffect } from 'react'
 import { Polygon } from '../icons/polygon'
 import { ETHERSCAN_POLYGON_TX_BASE_URL } from '../constants'
+import CloverPNG from '../assets/clover.png'
 
 const BlurBackground = styled.div`
   position: fixed;
@@ -38,13 +39,14 @@ export const TransactionNotification = ({txHash}: {txHash: string}) => {
   return (
     <BlurBackground onClick={handleClick}>
       <NotificationContainer>
-          <Polygon />
+          <img src={CloverPNG} alt="clover" width="60px" height="60px" />
           <H1>Your transaction is processing!</H1>
           <LoadingSpinner />
           <P>It may take a few minutes to complete.</P>
           <P>Do not close this window.</P>
           <P>See your transaction on Polyscan:</P>
           <a href={`${ETHERSCAN_POLYGON_TX_BASE_URL}${txHash}`} target="_blank" rel="noreferrer">{txHash}</a>
+          <Polygon />
       </NotificationContainer>
     </BlurBackground>
   )

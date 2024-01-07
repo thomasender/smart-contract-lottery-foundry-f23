@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { AppFrame, Button} from "./components/styles";
+import { AppFrame, Button, H1, InfoBoxBordered} from "./components/styles";
 import { TransactionNotification } from "./components/tx-notification";
 import { TicketBoughtNotification } from "./components/ticket-bought-notification";
 import { IsDrawingWinnerNotification } from "./components/is-drawing-winner-notification";
@@ -9,7 +9,6 @@ import { Header } from "./components/header";
 import { WelcomeInfo } from "./components/welcome-info";
 import { RaffleStateInfo } from "./components/raffle-state-info";
 import { PlayerInfo } from "./components/player-info";
-import { BuyTicketButton } from "./components/buy-ticket-button";
 import { ConnectButton } from "./components/connect-button";
 import {  POLYGON_MUMBAI_CHAIN_ID } from "./constants";
 import { useChainId } from "./hooks/use-chain-id";
@@ -29,7 +28,7 @@ function App() {
 
   if (!hasWindowEthereum) {
     return <>
-    <h1>Ooops!</h1>
+    <H1>Ooops!</H1>
     <h2>Looks like there is no Web3 Provider available!</h2>
     <p>Please <a href="https://metamask.io" target="_blank">install MetaMask</a> to interact with this DApp!</p>
     </>
@@ -78,7 +77,7 @@ function App() {
   if (chainId !== POLYGON_MUMBAI_CHAIN_ID) {
     return (
       <>
-        <h1>Ooops!</h1>
+        <H1>Ooops!</H1>
         <h2>Looks like you are not connected to the Polygon Mainnet!</h2>
         <Polygon />
         <p>Please switch to the Polygon Mainnet to interact with this DApp!</p>
@@ -92,9 +91,10 @@ function App() {
       <Header />
       <WelcomeInfo />
       <RaffleStateInfo />
-      <PlayerInfo />
-      <ConnectButton />
-      <BuyTicketButton setTxHash={setTxHash} setShowTicketBoughtNotification={setShowTicketBoughtNotification} />
+      <InfoBoxBordered>
+        <PlayerInfo setTxHash={setTxHash} setShowTicketBoughtNotification={setShowTicketBoughtNotification}/>
+        <ConnectButton />
+      </InfoBoxBordered>
       <LastDrawInfo />
       {txHash ? <TransactionNotification txHash={txHash} /> : null}
       {showTicketBoughtNotification ? <TicketBoughtNotification closeMe={() => setShowTicketBoughtNotification(false)}/> : null}
