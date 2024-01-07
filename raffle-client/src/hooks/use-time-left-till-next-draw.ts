@@ -8,7 +8,6 @@ const HOURS_IN_DAY = 24;
 const ONE_MINUTE_IN_MS = MILLISECONDS_IN_SECOND * SECONDS_IN_MINUTE;
 const ONE_HOUR_IN_MS = ONE_MINUTE_IN_MS * MINUTES_IN_HOUR;
 const ONE_DAY_IN_MS = ONE_HOUR_IN_MS * HOURS_IN_DAY;
-const FIVE_MINUTES_IN_MS = ONE_MINUTE_IN_MS * 5;
 
 type TimeLeft = {
   days?: number;
@@ -20,16 +19,11 @@ type TimeLeft = {
 export const useTimeLeftTillNextDraw = () => {
     const timestampTillNextDraw = useTimestampTillNextDraw();
     const [timeLeft, setTimeLeft] = useState<TimeLeft>();
-    const [stopTicketSale, setStopTicketSale] = useState(false)
     
   useEffect(() => {
     const calculateTimeLeft = () => {
         const difference = timestampTillNextDraw - Date.now();
         const timeLeft: TimeLeft = {};
-        // Stop ticket sale if the difference is less than 5 Minutes
-        if (difference <= FIVE_MINUTES_IN_MS) {
-          setStopTicketSale(true) 
-        }
 
         if (difference > 0) {
             timeLeft.days = Math.floor(difference / (ONE_DAY_IN_MS));
@@ -49,5 +43,5 @@ export const useTimeLeftTillNextDraw = () => {
     return () => clearInterval(timer);
   }, [timestampTillNextDraw]);
 
-  return {timeLeft, stopTicketSale};
+  return timeLeft;
 }

@@ -2,7 +2,7 @@ import { useTimeLeftTillNextDraw } from '../hooks/use-time-left-till-next-draw';
 import { FlexColCenter, P } from './styles';
 
 export const Countdown = () => {
-  const { timeLeft } = useTimeLeftTillNextDraw();
+  const timeLeft = useTimeLeftTillNextDraw();
 
   const { days, hours, minutes, seconds } = timeLeft || {};
   if (!timeLeft || !days && !hours && !minutes && !seconds) {
