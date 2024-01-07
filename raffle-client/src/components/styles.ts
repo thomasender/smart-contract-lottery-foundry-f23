@@ -50,7 +50,10 @@ export const AppFrame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
+  @media (min-width: 768px) {
+    gap: 24px;
+  }
 `
 
 export const Button = styled.button`
@@ -165,16 +168,16 @@ export const H1 = styled.h1`
 export const P = styled.p`
     margin: 0;
     text-align: center;
+    font-size: 0.8rem;
     @media (min-width: 768px) {
-        font-size: 1.8rem;
+        font-size: 1rem;
     }
-
 `
 
 export const PSmall = styled(P)`
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     @media (min-width: 768px) {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 `
 

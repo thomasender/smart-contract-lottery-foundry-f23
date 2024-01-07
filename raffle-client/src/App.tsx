@@ -90,11 +90,11 @@ function App() {
     <AppFrame>
       <Header />
       <WelcomeInfo />
-      <RaffleStateInfo />
       <InfoBoxBordered>
         <PlayerInfo setTxHash={setTxHash} setShowTicketBoughtNotification={setShowTicketBoughtNotification}/>
         <ConnectButton />
       </InfoBoxBordered>
+      <RaffleStateInfo />
       <LastDrawInfo />
       {txHash ? <TransactionNotification txHash={txHash} /> : null}
       {showTicketBoughtNotification ? <TicketBoughtNotification closeMe={() => setShowTicketBoughtNotification(false)}/> : null}
