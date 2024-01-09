@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useRecentWinner } from './use-last-winner'
+import { useRecentWinner } from './use-recent-winner'
 import { useSigner } from './use-signer';
 
 export const useIsCurrentUserRecentWinner = () => {

@@ -1,7 +1,7 @@
 import { ETHERSCAN_POLYGON_ADDRESS_BASE_URL } from "../constants";
 import { useIsCurrentUserRecentWinner } from "../hooks/use-is-current-user-recent-winner"
 import { useLastDrawTimestamp } from "../hooks/use-last-draw-timestamp";
-import { useRecentWinner } from "../hooks/use-last-winner";
+import { useRecentWinner } from "../hooks/use-recent-winner";
 import { Polygon } from "../icons/polygon";
 import { sliceAddress } from "../utils";
 import { InfoBoxBordered, P } from "./styles";

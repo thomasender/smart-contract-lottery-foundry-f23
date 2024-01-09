@@ -30,7 +30,7 @@ export const Header = () => {
         <RotateAnimation>
           <img src={CloverPNG} alt="clover" width="60px" height="60px" />
         </RotateAnimation>
-        <H1>Proovably FAIR Raffle!</H1>
+        <H1>Provably FAIR Raffle!</H1>
         <RotateAnimation>
             <Polygon />
         </RotateAnimation>
