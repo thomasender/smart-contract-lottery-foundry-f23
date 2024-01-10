@@ -15,7 +15,7 @@ export const useRecentWinner = () => {
             setRecentWinner(recentWinner);
         }
         getLastWinner();
-        const timer = setInterval(() => getLastWinner(), 5000);
+        const timer = setInterval(() => getLastWinner(), 2000);
 
         return () => clearInterval(timer);
 
