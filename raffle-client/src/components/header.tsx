@@ -1,7 +1,7 @@
 import styled, {keyframes} from 'styled-components'
 import { Polygon } from '../icons/polygon'
-import { H1 } from './styles';
-import CloverPNG from '../assets/clover.png'
+import { H1 } from './styles'
+import Chainlink from '../assets/chainlink.png'
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -28,9 +28,9 @@ export const Header = () => {
   return (
     <HeaderContainer>
         <RotateAnimation>
-          <img src={CloverPNG} alt="clover" width="60px" height="60px" />
+          <img src={Chainlink} alt="clover" width="60px" height="60px" />
         </RotateAnimation>
-        <H1>Provably FAIR Raffle!</H1>
+        <H1>Welcome to the fair Raffle!</H1>
         <RotateAnimation>
             <Polygon />
         </RotateAnimation>

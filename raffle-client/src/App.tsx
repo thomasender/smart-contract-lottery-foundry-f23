@@ -17,6 +17,7 @@ import { useOnAccountsChanged } from "./hooks/use-on-accounts-changed";
 import { useOnChainChanged } from "./hooks/use-on-chain-changed";
 import { Polygon } from "./icons/polygon";
 import { switchToPolygonMumbai } from "./utils";
+import { ThemeToggler } from "./components/theme-toggler";
 
 function App() {
     const [txHash, setTxHash] = useState<string | null>(null);
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <AppFrame>
+      <ThemeToggler />
       <Header />
       <WelcomeInfo />
       <InfoBoxBordered>

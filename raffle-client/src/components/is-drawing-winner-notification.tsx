@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useCallback, useEffect } from 'react'
 import { RAFFLESTATE, useRaffleState } from '../hooks/use-raffle-state'
 import CloverPNG from '../assets/clover.png'
+import Chainlink from '../assets/chainlink.png'
 
 const BlurBackground = styled.div`
   position: fixed;
@@ -45,6 +46,7 @@ export const IsDrawingWinnerNotification = () => {
           <LoadingSpinner />
           <P>It may take a few minutes to complete.</P>
           <P>Hold on to your seat!</P>
+          <img src={Chainlink} alt="chainlink" width="60px" height="60px" />
       </NotificationContainer>
     </BlurBackground>
   )

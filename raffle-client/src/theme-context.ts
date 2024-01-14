@@ -32,11 +32,11 @@ export const light: DefaultTheme = {
     error: '#ff0000',
     info: '#0000ff',
     contrast: '#ffffff',
-    background: '#ffffff',
-    text: '#333',
+    background: '#dad4fb',
+    text: '#000',
     hover: '#ccc',
     purple: '#7342DC',
-    lightgreen: 'rgb(84, 188, 82)',
+    lightgreen: 'rgb(54, 89, 210)',
   },
   button: {
     primary: {
