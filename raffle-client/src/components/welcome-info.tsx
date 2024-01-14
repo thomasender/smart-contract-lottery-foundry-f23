@@ -19,7 +19,7 @@ export const WelcomeInfo = () => {
     <StyledWelcomeInfo>
       <FlexRowCenter>
         <img src={Heart} alt="heart" width="60px" height="60px" />
-         <P><a href={RaffleHowToPDF} target="_blank">Learn how the Raffle works and why it is 100% proovably fair here!</a></P>
+         <P><a href={RaffleHowToPDF} target="_blank">Learn how the Raffle works and why it is 100% provably fair here!</a></P>
         <img src={CloverPNG} alt="chainlink" width="60px" height="60px" />
       </FlexRowCenter>
         <a href="https://faucets.chain.link/mumbai" target="_blank">Get some Test Matic!</a>
