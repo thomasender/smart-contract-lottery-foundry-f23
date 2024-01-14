@@ -10,6 +10,8 @@ const StyledWelcomeInfo = styled(FlexColCenter)`
     align-items: center;
     justify-content: center;
     padding: 12px;
+    padding-top: 0;
+    gap: 0;
 `;
 
 export const WelcomeInfo = () => {
@@ -20,6 +22,7 @@ export const WelcomeInfo = () => {
          <P><a href={RaffleHowToPDF} target="_blank">Learn how the Raffle works and why it is 100% proovably fair here!</a></P>
         <img src={CloverPNG} alt="chainlink" width="60px" height="60px" />
       </FlexRowCenter>
+        <a href="https://faucets.chain.link/mumbai" target="_blank">Get some Test Matic!</a>
     </StyledWelcomeInfo>
   )
 }
