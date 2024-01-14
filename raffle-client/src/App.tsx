@@ -16,6 +16,7 @@ import { useCheckWindowEthereum } from "./hooks/use-check-window-ethereum";
 import { useOnAccountsChanged } from "./hooks/use-on-accounts-changed";
 import { useOnChainChanged } from "./hooks/use-on-chain-changed";
 import { Polygon } from "./icons/polygon";
+import { switchToPolygonMumbai } from "./utils";
 
 function App() {
     const [txHash, setTxHash] = useState<string | null>(null);
@@ -34,54 +35,14 @@ function App() {
     </>
   }
 
-    const switchToPolygonMainnet = async () => {
-    try {
-        await window.ethereum?.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{
-            chainId: '0x89', // Chain ID for Polygon Mainnet
-          }],
-        });
-    } catch {
-      try {
-        await window.ethereum?.request({
-          "method": "wallet_addEthereumChain",
-          "params": [
-            {
-              "chainId": "0x89",
-              "chainName": "Polygon LlamaNodes",
-              "rpcUrls": [
-                "https://polygon.llamarpc.com"
-              ],
-              "iconUrls": [
-                "https://xdaichain.com/fake/example/url/xdai.svg",
-                "https://xdaichain.com/fake/example/url/xdai.png"
-              ],
-              "nativeCurrency": {
-                "name": "MATIC",
-                "symbol": "MATIC",
-                "decimals": 18
-              },
-              "blockExplorerUrls": [
-                "https://polygonscan.com"
-              ]
-            }
-          ]
-        })
-      } catch {
-        console.log('User did not want to switch to Polygon Mainnet!')
-      }
-    }
-  };
-
   if (chainId !== POLYGON_MUMBAI_CHAIN_ID) {
     return (
       <>
         <H1>Ooops!</H1>
-        <h2>Looks like you are not connected to the Polygon Mainnet!</h2>
+        <h2>Looks like you are not connected to Polygon Mumbai!</h2>
         <Polygon />
-        <p>Please switch to the Polygon Mainnet to interact with this DApp!</p>
-        <Button onClick={switchToPolygonMainnet}>Switch to Polygon Now!</Button>
+        <p>Please switch to the Polygon Mumbai to interact with this DApp!</p>
+        <Button onClick={switchToPolygonMumbai}>Switch to Mumbai Now!</Button>
       </>
     )
   }
