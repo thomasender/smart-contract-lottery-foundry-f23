@@ -73,6 +73,9 @@ contract Raffle is VRFConsumerBaseV2 {
         s_owner = msg.sender;
     }
 
+    /// @notice This function is used to buy a ticket
+    /// @dev Adds the player to the list of players
+    /// @dev Emits the EnteredRaffle event
     function buyTicket() external payable {
         if (msg.value != i_entranceFee) {
             revert Raffle__InvalidEntranceFee();
