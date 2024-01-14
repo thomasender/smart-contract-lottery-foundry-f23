@@ -7,11 +7,11 @@ import { GlobalStyle } from './components/styles'
 
 
 export const AppWrapper = () => {
-  const [theme, toggleTheme] = useState('dark')
+  const [theme, toggleTheme] = useState('light')
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <ThemeProvider theme={theme === 'light' ? light : dark}>
+      <ThemeProvider theme={theme === 'dark' ? dark : light}>
       <GlobalStyle />
           <App />
       </ThemeProvider>
